@@ -49,6 +49,11 @@ class DataBase {
     return connection;
   }
 
+  Future<void> _closeConnection() async {
+    var connection = await _connection();
+    await connection.close();
+  }
+
   /// Run it [query].
   /// 
   /// Example:
@@ -76,7 +81,7 @@ class DataBase {
     for (final row in result.rows) {
       arrayElements.add(row.assoc());
     }
-
+    await _closeConnection();
     return arrayElements;
   }
 
@@ -99,6 +104,7 @@ class DataBase {
       arrayElements.add(row.assoc());
     }
 
+    await _closeConnection();
     return arrayElements;
   }
 
@@ -127,6 +133,7 @@ class DataBase {
     
     var result = await _query(query);
 
+    await _closeConnection();
     return result;
   }
 
@@ -157,6 +164,7 @@ class DataBase {
     
     var result = await _query(query);
 
+    await _closeConnection();
     return result;
   }
   
@@ -170,6 +178,7 @@ class DataBase {
     String query = 'DELETE FROM $tableName WHERE id = $id';
     var result = await _query(query);
 
+    await _closeConnection();
     return result;
   }
 }
