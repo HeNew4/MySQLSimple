@@ -1,8 +1,8 @@
 import 'package:mysql_client/mysql_client.dart';
-// TODO: Put public facing types in this file.
 
 /// Checks if you are awesome. Spoiler: you are.
 class Awesome {
+  // I am not going to delete this. It made my day :D
   bool get isAwesome => true;
 }
 
