@@ -85,6 +85,38 @@ class DataBase {
     return arrayElements;
   }
 
+  /// You get all the elements of the [tableName],
+  /// with the specific elements of [elementsSpecific].
+  /// 
+  /// Example:
+  /// ```dart
+  /// getAllSpecificElemets('users', ['id', 'nombre']);
+  /// ```
+  Future getAllSpecificElemets(String tableName, List<String> elementsSpecific) async {
+    List arrayElements = [];
+    String elementQuery = '';
+
+    for (var element in elementsSpecific) {
+      elementQuery += '$element,';
+    }
+    elementQuery = elementQuery.substring(0, elementQuery.length - 1);
+
+    String query = 'SELECT $elementQuery FROM $tableName';
+
+    var result = await _query(query);
+
+    for (final row in result.rows) {
+      arrayElements.add(row.assoc());
+    }
+
+    await _closeConnection();
+
+    return arrayElements;
+  }
+
+  /// # Search
+  /// ## Simple
+  /// 
   /// Searches for any item(s) in the database. Requires it [tableName] where to search;
   /// Requires it [columnName] to know which column to search;
   /// Requires it [searchValue] to finish the search. 
@@ -94,10 +126,28 @@ class DataBase {
   /// ``` dart
   /// searchElements('users', 'name', 'joe');
   /// ```
-  Future searchElements(String tableName, String columnName, String searchValue) async {
+  /// 
+  /// ## Condition
+  /// 
+  /// Searches for any item(s) in the database. Requires [tableName] to search,
+  /// but it changes something here if you help [condition] = true, it will search with a condition;
+  /// Requires it [columnName] to know which column to search;
+  /// It requires [searchValue] which will be for the condition that [columnName] did.
+  /// 
+  /// Example:
+  /// ```dart
+  /// searchElements();
+  /// ```
+  Future searchElements(String tableName, String columnName, String searchTerm, [bool condition = false]) async {
     List arrayElements = [];
-    String query = 'SELECT * FROM $tableName  WHERE $columnName  = \'$searchValue\'';
-    
+    String query = '';
+
+    if (!condition) {
+      query = 'SELECT * FROM $tableName  WHERE $columnName  = \'$searchTerm\'';
+    } else {
+      query = 'SELECT * FROM $tableName  WHERE $columnName $searchTerm';
+    }
+
     var result = await _query(query);
 
     for (final row in result.rows) {
