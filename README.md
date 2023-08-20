@@ -1,6 +1,6 @@
 # MySQL Simple
 
-This Dart library aims to simplify and streamline the process of interacting with MySQL databases, providing a user-friendly and efficient interface for performing queries, transactions and common database operations.
+This Dart library aims to simplify and streamline the process of interacting with MySQL databases.
 
 ## Features
 
