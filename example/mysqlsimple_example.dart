@@ -19,4 +19,7 @@ void main() async {
 
   // Delete Element of 'Palette'
   await db.deleteElement('palette', '6');
+
+  // Create Table
+  await db.createTable('users', {'id': 'INT', 'name': 'VARCHAR(50)'});
 }
