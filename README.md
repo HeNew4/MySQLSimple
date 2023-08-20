@@ -4,8 +4,12 @@ This Dart library aims to simplify and streamline the process of interacting wit
 
 ## Features
 
-- **Simple Interface**: Forget the complexities of communicating with MySQL databases. Our library offers an intuitive interface that makes it easy to create and execute SQL queries.
-- **Connection Management**: The library automatically handles database connection management, ensuring efficient and seamless resource management.
+- Establish a connection to a MySQL database.
+- Execute SQL queries and retrieve results.
+- Create tables with specified column definitions.
+- Retrieve all elements or specific columns from a table.
+- Search for items in the database with various search options.
+- Insert, update, and delete elements in the database.
 
 ## Getting started
 
