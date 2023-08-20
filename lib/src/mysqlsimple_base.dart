@@ -78,6 +78,7 @@ class DataBase {
     content.forEach((key, value) {
       elementsTable += '\'$key\' $value,';
     });
+    elementsTable = elementsTable.substring(0, elementsTable.length - 1);
     
     String query = 'CREATE TABLE $tableName ($elementsTable)';
     await _query(query);
