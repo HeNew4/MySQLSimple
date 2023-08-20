@@ -66,6 +66,23 @@ class DataBase {
     return result;
   }
 
+  /// Create a table with it [tableName] with the data from [content].
+  /// 
+  /// Example:
+  /// ```dart
+  /// createTable('users', {'id': 'INT AUTO_INCREMENT', 'nombre': 'VARCHAR(25)'})
+  /// ```
+  Future<void> createTable(String tableName, Map<String, String> content) async {
+    String elementsTable = '';
+
+    content.forEach((key, value) {
+      elementsTable += '\'$key\' $value,';
+    });
+    
+    String query = 'CREATE TABLE $tableName ($elementsTable)';
+    await _query(query);
+  }
+
   /// Gets all data from [tableName]. Returns a list of all data.
   /// 
   /// Example:
@@ -119,7 +136,7 @@ class DataBase {
   /// 
   /// Searches for any item(s) in the database. Requires it [tableName] where to search;
   /// Requires it [columnName] to know which column to search;
-  /// Requires it [searchValue] to finish the search. 
+  /// Requires it [searchTerm] to finish the search. 
   /// Returns a list of the searched items.
   /// 
   /// Example:
@@ -132,11 +149,11 @@ class DataBase {
   /// Searches for any item(s) in the database. Requires [tableName] to search,
   /// but it changes something here if you help [condition] = true, it will search with a condition;
   /// Requires it [columnName] to know which column to search;
-  /// It requires [searchValue] which will be for the condition that [columnName] did.
+  /// It requires [searchTerm] which will be for the condition that [columnName] did.
   /// 
   /// Example:
   /// ```dart
-  /// searchElements();
+  /// searchElements('paleta', 'id', '< 4', true);
   /// ```
   Future searchElements(String tableName, String columnName, String searchTerm, [bool condition = false]) async {
     List arrayElements = [];
