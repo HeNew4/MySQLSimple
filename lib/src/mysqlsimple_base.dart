@@ -76,7 +76,7 @@ class DataBase {
     String elementsTable = '';
 
     content.forEach((key, value) {
-      elementsTable += '\'$key\' $value,';
+      elementsTable += '`$key` $value NOT NULL,';
     });
     elementsTable = elementsTable.substring(0, elementsTable.length - 1);
     
