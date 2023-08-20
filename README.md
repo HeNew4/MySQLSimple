@@ -19,7 +19,7 @@ Add the following line to your pubspec.yaml file:
 dependencies:
   mysql_client: 0.0.27
   mysqlsimple:
-    git: git//github.com/henew/mysqlsimple
+    git: git//github.com/HeNew4/MySQLSimple
 ```
 
 ## Usage
